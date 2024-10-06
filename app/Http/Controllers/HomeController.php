@@ -25,6 +25,8 @@ class HomeController extends Controller
     {
         return view('profile.create');
     }
+    
+
 
     public function Logout(Request $request)
     {

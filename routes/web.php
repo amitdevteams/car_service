@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -29,3 +31,12 @@ Route::get('auth/google/callback', [App\Http\Controllers\Auth\RegisterController
 
 Route::post('/profile',[ProfileController::class,'storeProfile'])->name('store.profile');  
 Route::get('/',[ProfileController::class,'home']); 
+
+Route::middleware(['auth', 'user-access:admin'])->group(function () {
+  
+    
+    Route::get('/admin/home', [AdminController::class, 'adminHome'])->name('admin.home');
+    Route::get('/add/slider/content', [AdminController::class, 'title'])->name('admin.title');
+    Route::post('/add/slider/content', [AdminController::class, 'add_content'])->name('add_content');
+});
+Route::get('/content',[PageController::class,'marq_page'])->name('marq_page');  
